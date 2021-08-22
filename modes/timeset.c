@@ -90,7 +90,7 @@ void timeset_cb_alarm() {
 		break;
 		case SECONDS:
 			_timeset_settime();
-			app_switch_mode(MODE_CLOCK);
+			app_switch_mode(MODE_GREGORIAN);
 		break;
 	}
 }

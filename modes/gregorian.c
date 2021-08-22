@@ -1,29 +1,31 @@
 #include <stdio.h>
 #include "mode.h"
-#include "modes/clock.h"
+#include "modes/gregorian.h"
 #include "watch.h"
 
-void clock_init_mode(Mode *mode) {
-	mode->init = clock_init;
-	mode->loop = clock_loop;
-	mode->cb_light = clock_cb_light;
-	mode->cb_mode = clock_cb_mode;
-	mode->cb_alarm = clock_cb_alarm;
+void gregorian_init_mode(Mode *mode) {
+	mode->init = gregorian_init;
+	mode->loop = gregorian_loop;
+	mode->cb_light = gregorian_cb_light;
+	mode->cb_mode = gregorian_cb_mode;
+	mode->cb_alarm = gregorian_cb_alarm;
 }
 
-void clock_init() {
+void gregorian_init() {
 	// Clear the display by setting the ten indicators to zero
 	watch_display_string("          ", 0);
 
 	watch_set_indicator(WATCH_INDICATOR_24H);
-	watch_register_tick_callback(clock_cb_tick);
+	watch_register_tick_callback(gregorian_cb_tick);
 }
 
-void clock_loop() {
-	_clock_display();
+void gregorian_loop() {
+	_gregorian_display();
 }
 
-void _clock_display() {
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wformat-overflow"
+void _gregorian_display() {
 	char buf[7] = {0};
 
 	struct calendar_date_time date_time;
@@ -32,9 +34,10 @@ void _clock_display() {
 	watch_display_string(buf, 4);
 	watch_set_colon();
 }
+#pragma GCC diagnostic pop
 
-void clock_cb_light() {}
-void clock_cb_mode() {}
-void clock_cb_alarm() {}
+void gregorian_cb_light() {}
+void gregorian_cb_mode() {}
+void gregorian_cb_alarm() {}
 
-void clock_cb_tick() {}
+void gregorian_cb_tick() {}
