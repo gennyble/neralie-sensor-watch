@@ -27,6 +27,6 @@ If you're on a sensible system- mainly Windows, Mac, or Ubuntu in this case- `ma
 If all went well your watch's red light should flash with incoming data and then reset into your program. You're now safe to remove it from the MicroB and reassemble the watch.
 
 # Licensing
-The file at `/make/Makefile` Copyright (c) 2021 Joey Castillo under the MIT License. See LICENSE_MIT
+The file at `/make/Makefile` is Copyright (c) 2021 Joey Castillo under the MIT License. See [LICENSE_MIT](LICENSE_MIT)
 
-The rest of the code here is cast into the public domain under the CC0 license as seen in LICENSE. You are free to do with it what you want, go crazy. No attribution required, but always appreciated.
+The rest of the code here is cast into the public domain under the CC0 license as seen in [LICENSE](LICENSE). You are free to do with it what you want, go crazy. No attribution required, but always appreciated.
