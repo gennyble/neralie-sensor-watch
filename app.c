@@ -43,6 +43,10 @@ void app_setup() {
 
 // EIC disable/enable code ripped from hpl/eic/hpl_eic.c
 void _app_toggle_idle() {
+    // Wait on a possible software reset. It'd probably be bad to toggle the
+    // EIC if this is happening
+    hri_eic_wait_for_sync(EIC, EIC_SYNCBUSY_SWRST);
+
     if (app.idleing) {
         app.idleing = false;
 
@@ -59,6 +63,9 @@ void _app_toggle_idle() {
         NVIC_DisableIRQ(EIC_IRQn);
         hri_eic_clear_CTRLA_ENABLE_bit(EIC);
     }
+
+    // Wait on the EIC to synchronize before we flash the LED
+    hri_eic_wait_for_sync(EIC, EIC_SYNCBUSY_ENABLE);
 
     // Flash green to indicate we've changed idle states
     watch_set_led_green();
