@@ -25,3 +25,8 @@ Get the Sensor Watch board free from it's white plastic prison. Be sure the watc
 If you're on a sensible system- mainly Windows, Mac, or Ubuntu in this case- `make install` should work for you. If, however, you are on a system that doesn't mount for you, you can use the script found at `/make/upload.sh` to get the firmware to the watch. You need to run it as root, to mount/unmount the watch, so I recommend you give it a glance before you do so.
 
 If all went well your watch's red light should flash with incoming data and then reset into your program. You're now safe to remove it from the MicroB and reassemble the watch.
+
+# Licensing
+The file at `/make/Makefile` Copyright (c) 2021 Joey Castillo under the MIT License. See LICENSE_MIT
+
+The rest of the code here is cast into the public domain under the CC0 license as seen in LICENSE. You are free to do with it what you want, go crazy. No attribution required, but always appreciated.

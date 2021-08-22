@@ -1,3 +1,5 @@
+# Copyright (c) 2021 Joey Castillo under the MIT License
+
 ##############################################################################
 BUILD = build
 BIN = watch
