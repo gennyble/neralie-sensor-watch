@@ -5,13 +5,13 @@
 
 WATCHDEVICE=/dev/disk/by-label/WATCHBOOT
 
-if [ ! -f "$WATCHDEVICE" ]; then
+if [ ! -e "$WATCHDEVICE" ]; then
 	echo "Cannot find watch device!"
 	exit
 fi
 
 mkdir -p /tmp/neralie-sensor-watch-mount && \
-mount $watchdevice /tmp/neralie-sensor-watch-mount && \
+mount $WATCHDEVICE /tmp/neralie-sensor-watch-mount && \
 cp build/watch.uf2 /tmp/neralie-sensor-watch-mount && \
 sync && \
 umount /tmp/neralie-sensor-watch-mount
