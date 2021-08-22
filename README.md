@@ -1,11 +1,11 @@
 # Sensor Watch Neralie
-A face for the [Sensor Watch][sensorwatch] that will display time in the typical format as well as [Neralie][neralie].
+A face for the [Sensor Watch][sensor-watch] that will display time in the typical format as well as [Neralie][neralie].
 
-[sensorwatch]: https://github.com/joeycastillo/Sensor-Watch
+[sensor-watch]: https://github.com/joeycastillo/Sensor-Watch
 [neralie]: https://wiki.xxiivv.com/site/neralie.html
 
 ## Required packages
-In order to compile this face, you'll need the correct compiler and a libc that'll be happy about being on the watch.
+In order to compile this face, you'll need the correct compiler and a `libc` that'll be happy about being on the watch.
 
 On Arch, the package names are `arm-none-eabi-gcc` and `arm-none-eabi-newlib` for the compiler and lib, respectively.
 
