@@ -1,15 +1,14 @@
-#!/bin/fish
+#!/bin/sh
 
-# A little script that takes a device path. It'll upload the firmware, sync
-# to clear the buffer and actually write to the watch, and then unmount.
-# You'll likely need sudo for this script
+# This script mounts the watch in a temporary location, copies the firmware
+# to the watch, runs `sync` to be sure buffers are flushed, and the unmounts.
 
-set watchdevice "/dev/disk/by-label/WATCHBOOT"
+WATCHDEVICE=/dev/disk/by-label/WATCHBOOT
 
-if test ! -e $watchdevice
+if [ ! -f "$WATCHDEVICE" ]; then
 	echo "Cannot find watch device!"
 	exit
-end
+fi
 
 mkdir -p /tmp/neralie-sensor-watch-mount && \
 mount $watchdevice /tmp/neralie-sensor-watch-mount && \
