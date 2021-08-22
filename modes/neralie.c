@@ -7,6 +7,7 @@
 void neralie_init_mode(Mode *mode) {
 	mode->init = neralie_init;
 	mode->loop = neralie_loop;
+	mode->cb_tick = neralie_cb_tick;
 	mode->cb_light = neralie_cb_light;
 	mode->cb_mode = neralie_cb_mode;
 	mode->cb_alarm = neralie_cb_alarm;
@@ -18,7 +19,8 @@ void neralie_init() {
 	watch_clear_all_indicators();
 	watch_clear_colon();
 
-	watch_register_tick_callback(neralie_cb_tick);
+	// Update right away to avoid an empty display
+	_neralie_display();
 }
 
 void neralie_loop() {

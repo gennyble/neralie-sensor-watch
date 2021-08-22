@@ -7,6 +7,7 @@
 void gregorian_init_mode(Mode *mode) {
 	mode->init = gregorian_init;
 	mode->loop = gregorian_loop;
+	mode->cb_tick = gregorian_cb_tick;
 	mode->cb_light = gregorian_cb_light;
 	mode->cb_mode = gregorian_cb_mode;
 	mode->cb_alarm = gregorian_cb_alarm;
@@ -16,9 +17,10 @@ void gregorian_init() {
 	// Clear the display by setting the ten indicators to zero
 	watch_display_string("          ", 0);
 	watch_clear_all_indicators();
-
 	watch_set_indicator(WATCH_INDICATOR_24H);
-	watch_register_tick_callback(gregorian_cb_tick);
+
+	// Update right away to avoid a blank display
+	_gregorian_display();
 }
 
 void gregorian_loop() {
