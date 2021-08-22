@@ -48,16 +48,16 @@ void _app_toggle_idle() {
 
         // If we're currently ideing, turn the EIC back on to leave idle
         hri_eic_set_CTRLA_ENABLE_bit(EIC);
-	    NVIC_DisableIRQ(EIC_IRQn);
-	    NVIC_ClearPendingIRQ(EIC_IRQn);
-	    NVIC_EnableIRQ(EIC_IRQn);
+        NVIC_DisableIRQ(EIC_IRQn);
+        NVIC_ClearPendingIRQ(EIC_IRQn);
+        NVIC_EnableIRQ(EIC_IRQn);
     } else {
         app.idleing = true;
         app.idle_ticks = 0;
 
         // If we're not idleing, turn the EIC off to enter idle
         NVIC_DisableIRQ(EIC_IRQn);
-	    hri_eic_clear_CTRLA_ENABLE_bit(EIC);
+        hri_eic_clear_CTRLA_ENABLE_bit(EIC);
     }
 
     // Flash green to indicate we've changed idle states
