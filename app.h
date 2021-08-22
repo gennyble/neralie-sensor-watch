@@ -6,7 +6,7 @@
 
 typedef enum ApplicationMode {
     MODE_TIME_SET = 0, // Initial mode to force time set
-    MODE_CLOCK,        // Displays month, day, time.
+    MODE_GREGORIAN,    // Displays month, day, time.
     NUM_MODES          // Idea taken from Joey's BME280 project
 } ApplicationMode;
 

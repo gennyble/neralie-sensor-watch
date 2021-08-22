@@ -1,15 +1,17 @@
-#ifndef NERALIE_CLOCK_H
-#define NERALIE_CLOCK_H
+#ifndef NERALIE_gregorian_H
+#define NERALIE_gregorian_H
 
 #include "mode.h"
 
-void clock_init_mode(Mode*);
-void clock_init();
-void clock_loop();
+void gregorian_init_mode(Mode*);
+void gregorian_init();
+void gregorian_loop();
 
-void clock_cb_light();
-void clock_cb_mode();
-void clock_cb_alarm();
-void clock_cb_tick();
+void _gregorian_display();
 
-#endif//NERALIE_CLOCK_H
+void gregorian_cb_light();
+void gregorian_cb_mode();
+void gregorian_cb_alarm();
+void gregorian_cb_tick();
+
+#endif//NERALIE_gregorian_H
