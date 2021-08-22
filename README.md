@@ -1,6 +1,8 @@
 # Sensor Watch Neralie
 A face for the [Sensor Watch][sensor-watch] that will display time in the typical format as well as [Neralie][neralie].
 
+The ultimate goal is to replicate the Casio's original functions completely while providing the time in Neralie, too.
+
 [sensor-watch]: https://github.com/joeycastillo/Sensor-Watch
 [neralie]: https://wiki.xxiivv.com/site/neralie.html
 
