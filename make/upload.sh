@@ -4,14 +4,15 @@
 # to clear the buffer and actually write to the watch, and then unmount.
 # You'll likely need sudo for this script
 
-set dev $argv[1]
+set watchdevice "/dev/disk/by-label/WATCHBOOT"
 
-if test -z $argv[1]
-	echo "Which device is the watch?"
+if test ! -e $watchdevice
+	echo "Cannot find watch device!"
 	exit
 end
 
-mount $dev /mnt/watch
-cp build/watch.uf2 /mnt/watch/
-sync
-umount /mnt/watch
+mkdir -p /tmp/neralie-sensor-watch-mount && \
+mount $watchdevice /tmp/neralie-sensor-watch-mount && \
+cp build/watch.uf2 /tmp/neralie-sensor-watch-mount && \
+sync && \
+umount /tmp/neralie-sensor-watch-mount
