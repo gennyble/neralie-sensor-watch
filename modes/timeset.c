@@ -23,6 +23,10 @@ void timeset_init() {
 }
 
 void timeset_loop() {
+	_timeset_display();
+}
+
+void _timeset_display() {
 	char buf[16] = {0};
 
 	switch (data.position) {
@@ -42,43 +46,51 @@ void timeset_loop() {
 }
 
 void timeset_cb_light() {
-	switch (data.position) {
-		case HOURS:
-			if (data.hours < 24) {
-				data.hours++;
-			}
-		break;
-		case MINUTES:
-			if (data.minutes < 59) {
-				data.minutes++;
-			}
-		break;
-		case SECONDS:
-			if (data.seconds < 59) {
-				data.seconds++;
-			}
-		break;
-	}
+	do {
+		switch (data.position) {
+			case HOURS:
+				if (data.hours < 23) {
+					data.hours++;
+				}
+			break;
+			case MINUTES:
+				if (data.minutes < 59) {
+					data.minutes++;
+				}
+			break;
+			case SECONDS:
+				if (data.seconds < 59) {
+					data.seconds++;
+				}
+			break;
+		}
+		_timeset_display();
+		delay_ms(250);
+	} while (watch_get_pin_level(BTN_LIGHT));
 }
 
 void timeset_cb_mode() {
-	switch (data.position) {
-		case HOURS:
-			if (data.hours > 0) {
-				data.hours--;
-			}
-		break;
-		case MINUTES:
-			if (data.minutes > 0) {
-				data.minutes--;
-			}
-		break;
-		case SECONDS:
-			if (data.seconds > 0) {
-				data.seconds--;
-			}
-		break;
-	}
+	do {
+		switch (data.position) {
+			case HOURS:
+				if (data.hours > 0) {
+					data.hours--;
+				}
+			break;
+			case MINUTES:
+				if (data.minutes > 0) {
+					data.minutes--;
+				}
+			break;
+			case SECONDS:
+				if (data.seconds > 0) {
+					data.seconds--;
+				}
+			break;
+		}
+		_timeset_display();
+		delay_ms(250);
+	} while (watch_get_pin_level(BTN_MODE));
 }
 
 void timeset_cb_alarm() {
