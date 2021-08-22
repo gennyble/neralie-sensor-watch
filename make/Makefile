@@ -69,6 +69,7 @@ SRCS += \
   ../app.c \
   ../modes/timeset.c \
   ../modes/gregorian.c \
+  ../modes/neralie.c \
   ../../watch-library/main.c \
   ../../watch-library/startup_saml22.c \
   ../../watch-library/hw/driver_init.c \
