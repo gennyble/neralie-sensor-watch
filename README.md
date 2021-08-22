@@ -1,5 +1,8 @@
 # Sensor Watch Neralie
-A face for the sensor watch that will allow you to display time in Neralie. 
+A face for the [Sensor Watch][sensorwatch] that will display time in the typical format as well as [Neralie][neralie].
+
+[sensorwatch]: https://github.com/joeycastillo/Sensor-Watch
+[neralie]: https://wiki.xxiivv.com/site/neralie.html
 
 ## Required packages
 In order to compile this face, you'll need the correct compiler and a libc that'll be happy about being on the watch.
