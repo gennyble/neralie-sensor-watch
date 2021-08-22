@@ -4,6 +4,7 @@
 #include "mode.h"
 #include "modes/timeset.h"
 #include "modes/gregorian.h"
+#include "modes/neralie.h"
 #include "watch.h"
 
 Application app;
@@ -15,6 +16,7 @@ void cb_alarm_pressed();
 void app_init() {
     timeset_init_mode(&app.modes[MODE_TIME_SET]);
     gregorian_init_mode(&app.modes[MODE_GREGORIAN]);
+    neralie_init_mode(&app.modes[MODE_NERALIE]);
 
     app.current_mode = &app.modes[MODE_TIME_SET];
 }

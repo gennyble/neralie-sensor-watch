@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "app.h"
 #include "mode.h"
 #include "modes/gregorian.h"
 #include "watch.h"
@@ -14,6 +15,7 @@ void gregorian_init_mode(Mode *mode) {
 void gregorian_init() {
 	// Clear the display by setting the ten indicators to zero
 	watch_display_string("          ", 0);
+	watch_clear_all_indicators();
 
 	watch_set_indicator(WATCH_INDICATOR_24H);
 	watch_register_tick_callback(gregorian_cb_tick);
@@ -37,7 +39,9 @@ void _gregorian_display() {
 #pragma GCC diagnostic pop
 
 void gregorian_cb_light() {}
-void gregorian_cb_mode() {}
+void gregorian_cb_mode() {
+	app_switch_mode(MODE_NERALIE);
+}
 void gregorian_cb_alarm() {}
 
 void gregorian_cb_tick() {}
