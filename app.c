@@ -29,18 +29,41 @@ void app_wake_from_deep_sleep() {
 
 void app_setup() {
     watch_enable_led(false); // enable LED with plain digital IO, not PWM
-    _app_setup_buttons();
+    
+    watch_enable_buttons();
+    watch_register_button_callback(BTN_LIGHT, app_cb_light);
+    watch_register_button_callback(BTN_MODE, app_cb_mode);
+    watch_register_button_callback(BTN_ALARM, app_cb_alarm);
+
     watch_enable_display();
 
     // Don't forget to init the current mode
     app.current_mode->init();
 }
 
-void _app_setup_buttons() {
-    watch_enable_buttons();
-    watch_register_button_callback(BTN_LIGHT, app_cb_light);
-    watch_register_button_callback(BTN_MODE, app_cb_mode);
-    watch_register_button_callback(BTN_ALARM, app_cb_alarm);
+// EIC disable/enable code ripped from hpl/eic/hpl_eic.c
+void _app_toggle_idle() {
+    if (app.idleing) {
+        app.idleing = false;
+
+        // If we're currently ideing, turn the EIC back on to leave idle
+        hri_eic_set_CTRLA_ENABLE_bit(EIC);
+	    NVIC_DisableIRQ(EIC_IRQn);
+	    NVIC_ClearPendingIRQ(EIC_IRQn);
+	    NVIC_EnableIRQ(EIC_IRQn);
+    } else {
+        app.idleing = true;
+        app.idle_ticks = 0;
+
+        // If we're not idleing, turn the EIC off to enter idle
+        NVIC_DisableIRQ(EIC_IRQn);
+	    hri_eic_clear_CTRLA_ENABLE_bit(EIC);
+    }
+
+    // Flash green to indicate we've changed idle states
+    watch_set_led_green();
+    delay_ms(100);
+    watch_set_led_off();
 }
 
 void app_prepare_for_sleep() {
@@ -93,17 +116,7 @@ void app_cb_alarm() {
     app.idle_ticks = 0;
 
     if (app.idleing) {
-        app.idleing = false;
-
-        // Turn the EIC back on, it should still be configured?
-        //ext_irq_init();
-        _app_setup_buttons();
-
-        // Flash green to indicate we're active again.
-        watch_set_led_green();
-        delay_ms(250);
-        watch_set_led_off();
-
+        _app_toggle_idle();
         return;
     }
 
@@ -117,14 +130,6 @@ void app_cb_tick() {
     
     app.idle_ticks++;
     if (app.ticks_to_idle <= app.idle_ticks) {
-        app.idleing = true;
-        app.idle_ticks = 0;
-
-        ext_irq_deinit();
-
-        //Flash the green LED to indicate entering idle
-        watch_set_led_green();
-        delay_ms(250);
-        watch_set_led_off();
+        _app_toggle_idle();
     }
 }

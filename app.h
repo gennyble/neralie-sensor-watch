@@ -26,7 +26,7 @@ typedef struct Application {
 
 extern Application app;
 
-void _app_setup_buttons();
+void _app_toggle_idle();
 
 void app_cb_light();
 void app_cb_mode();
