@@ -20,6 +20,6 @@ git clone https://github.com/gennyble/neralie-sensor-watch
 Now navigate into `neralie-sensor-watch/make` and run `make`.
 
 ## Getting it on the watch
-Assuming your watch is plugged in to the computer and in the UF2 bootloader mode...
+Get the Sensor Watch board free from it's white plastic prison. Be sure the watch is not still powered; don't plug it into the MicroB without removing the battery. Now plug it in to a MicroB cable. Be sure that the beveled side of the Micro-B connector is on the same side as the processor of the Sensor Watch board. Flip the board over- gently! the connector is delicate- and find the small reset button. Tap it twice, rapidly, to put the watch into the required UF2 bootloader mode. It usually takes me a few attempts, so don't worry if it takes a few tries.
 
-be sure you're still in the `make` directory. Run `make install`, which might error with `No such file or directory: '/media'`. If that's the case, run `sudo ./upload.sh`. I recommend you look at the script, as you're running it with `sudo`. It expects `/mnt/watch` to exist. If all went well your watch's red light should flash with incoming data and then reset into your program.
+In the make directory, run the `upload.sh` script (probably as root as it needs to mount and unmount the watch). If all went well your watch's red light should flash with incoming data and then reset into your program. You're now safe to remove it from the MicroB and reassemble the watch.
