@@ -79,6 +79,10 @@ void app_prepare_for_sleep() {
 
 void app_wake_from_sleep() {}
 
+void app_reset_idle_timer() {
+    app.idle_ticks = 0;
+}
+
 void app_switch_mode(ApplicationMode mode) {
     if (!app.setup_idle) {
         // Don't idle while we're setting the time at first, do it later.
@@ -90,6 +94,12 @@ void app_switch_mode(ApplicationMode mode) {
         app.modes[mode].init();
         app.current_mode = &app.modes[mode];
     }
+}
+
+void app_light_led(uint8_t sec) {
+    watch_set_led_green();
+    app.led_powered = true;
+    app.lit_led_ticks = sec;
 }
 
 bool app_loop() {
@@ -132,6 +142,13 @@ void app_cb_alarm() {
 
 void app_cb_tick() {
     app.current_mode->cb_tick();
+
+    if (app.lit_led_ticks > 0) {
+        app.lit_led_ticks--;
+    } else if (app.led_powered) {
+        watch_set_led_off();
+        app.led_powered = false;
+    }
 
     if (app.idleing) return;
     

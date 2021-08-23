@@ -27,5 +27,6 @@ void timeset_cb_mode();
 void timeset_cb_alarm();
 
 void _timeset_settime();
+void _timeset_display();
 
 #endif//NERALIE_TIMESET_H
