@@ -28,6 +28,7 @@ void gregorian_init() {
 		watch_set_indicator(WATCH_INDICATOR_24H);
 	}
 
+	app_light(true);
 	// Update right away to avoid a blank display
 	_gregorian_display();
 }
@@ -71,9 +72,7 @@ void _gregorian_switch_time_mode() {
 	_gregorian_display();
 }
 
-void gregorian_cb_light() {
-	app_light_led(3);
-}
+void gregorian_cb_light() {}
 
 void gregorian_cb_mode() {
 	app_switch_mode(MODE_NERALIE);
@@ -83,9 +82,4 @@ void gregorian_cb_alarm() {
 	_gregorian_switch_time_mode();
 }
 
-void gregorian_cb_tick() {
-	if (app.led_powered && app.lit_led_ticks == 1 && watch_get_pin_level(BTN_LIGHT)) {
-		app.lit_led_ticks++;
-		app_reset_idle_timer();
-	}
-}
+void gregorian_cb_tick() {}
