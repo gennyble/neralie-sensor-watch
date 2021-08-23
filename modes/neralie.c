@@ -36,7 +36,7 @@ void _neralie_display() {
 	watch_get_date_time(&date_time);
 
 	uint32_t total_ms = ((date_time.time.hour * 60 * 60) + (date_time.time.min * 60) + date_time.time.sec) * 1000;
-	uint16_t total_decapulse = total_ms / 864;
+	uint32_t total_decapulse = total_ms / 864;
 
 	uint16_t beats = total_decapulse / 100;
 	uint16_t decapulse = total_decapulse % 100;
