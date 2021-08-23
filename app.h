@@ -21,6 +21,9 @@ typedef struct Application {
     uint8_t ticks_to_idle;
     uint8_t idle_ticks;
 
+    bool led_powered;
+    uint8_t lit_led_ticks;
+
     bool debouncing;
 } Application;
 
@@ -33,6 +36,8 @@ void app_cb_mode();
 void app_cb_alarm();
 void app_cb_tick();
 
+void app_reset_idle_timer();
 void app_switch_mode(ApplicationMode);
+void app_light_led(uint8_t);
 
 #endif//APP_H
