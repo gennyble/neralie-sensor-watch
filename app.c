@@ -79,6 +79,11 @@ void app_prepare_for_sleep() {
 
 void app_wake_from_sleep() {}
 
+// Use the light button to light the screen
+void app_light(bool light) {
+    app.light_enabled = light;
+}
+
 void app_reset_idle_timer() {
     app.idle_ticks = 0;
 }
@@ -116,7 +121,11 @@ void app_cb_light() {
     app.debouncing = true;
     app.idle_ticks = 0;
 
-    app.current_mode->cb_light();
+    if (app.light_enabled) {
+        app_light_led(3);
+    } else {
+        app.current_mode->cb_light();
+    }
 }
 
 void app_cb_mode() {
@@ -146,6 +155,11 @@ void app_cb_tick() {
     if (app.lit_led_ticks > 0) {
         app.lit_led_ticks--;
     } else if (app.led_powered) {
+        if (watch_get_pin_level(BTN_LIGHT)) {
+            app_reset_idle_timer();
+            return;
+        }
+
         watch_set_led_off();
         app.led_powered = false;
     }

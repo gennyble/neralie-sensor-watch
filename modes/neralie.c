@@ -19,6 +19,7 @@ void neralie_init() {
 	watch_clear_all_indicators();
 	watch_clear_colon();
 
+	app_light(true);
 	// Update right away to avoid an empty display
 	_neralie_display();
 }
@@ -46,10 +47,18 @@ void _neralie_display() {
 }
 #pragma GCC diagnostic pop
 
-void neralie_cb_light() {}
+void neralie_cb_light() {
+	app_light_led(3);
+}
+
 void neralie_cb_mode() {
 	app_switch_mode(MODE_GREGORIAN);
 }
 void neralie_cb_alarm() {}
 
-void neralie_cb_tick() {}
+void neralie_cb_tick() {
+	if (app.led_powered && app.lit_led_ticks == 1 && watch_get_pin_level(BTN_LIGHT)) {
+		app.lit_led_ticks++;
+		app_reset_idle_timer();
+	}
+}
