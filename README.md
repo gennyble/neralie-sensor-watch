@@ -1,3 +1,5 @@
+**This code has lain dormant for over a year and will not work with the new Movement framework that the Sensor Watch has moved to. Eventually I'll update this. Until then**
+
 # Sensor Watch Neralie
 A face for the [Sensor Watch][sensor-watch] that will display time in the typical format as well as [Neralie][neralie].
 
